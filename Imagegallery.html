@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Image Gallery</title>
+    <style>
+        *{
+         margin:0;
+         padding:0;
+         box-sizing:border-box;
+        
+        }
+    body{
+        font-family:Arial,Sans-serif;
+        background:#111;
+        color:white;
+    }
+    .gallery{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(250,1fr));
+        gap:15px;
+        padding:20px;
+        max-width:1200px;
+        margin:0 auto;
+    }
+    .gallery img{
+        width:100%;
+        height:200px;
+        object-fit:cover;
+        border-radius:10px;
+        cursor:pointer;
+        transition:transform 0.3s ease;
+
+    }
+    .gallry img:hover{
+        transform:scale(1.05);
+    }
+    .lightbox{
+        display:none;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+        background:rgba(0,0,0,0.9);
+        z-index:1000;
+        align-items:center;
+        justify-content:center;
+
+
+    }
+    .lightbox.active{
+        display:flex;
+
+    }
+    .lightbox img{
+        max-width: 90%;
+        max-height: 90%;
+        border-radius:10px;
+
+    }
+    .nav-btn, .close-btn{
+        position:absolute;
+        background:rgba(225,225,225,0.2);
+        border:none;
+        color:white;
+        padding:10px 15px;
+        border-radius:50%;
+        cursor:pointer;
+        font-size:18px;
+        transition:background 0.3s ease;
+
+    }
+    .nav-btn:hover, .close-btn:hover{
+        background:rgba(225,225,225,0.4);
+
+    }
+    .prev{left:20px;}
+    .next{right:20px;}
+    .close-btn{top:20px;right:20px;}
+
+    @media(max-width:768px){
+        .gallery{
+            grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+            gap:10px;
+            padding:15px;
+        }
+        .gallery img{
+            height: 100px;
+        }
+    }
+    </style>
+    </head>
+    <body>
+        <div class="gallery"id="gallery">
+            <img src="https://picsum.photos/400/300?random=1"alt="Image 1">
+            <img src="https://picsum.photos/400/300?random=2"alt="Image 2">
+            <img src="https://picsum.photos/400/300?random=3"alt="Image 3">
+            <img src="https://picsum.photos/400/300?random=4"alt="Image 4">
+            <img src="https://picsum.photos/400/300?random=5"alt="Image 5">
+            <img src="https://picsum.photos/400/300?random=6"alt="Image 6">
+            <img src="https://picsum.photos/400/300?random=7"alt="Image 7">
+            
+            </div>
+
+            <div class="ligthbox"id="lightbox">
+                <button class="close-btn" onclick="closelightbox()">&times;</button>
+                <button class="nav-btn prev" onclick="changeImage(-1)">>&#8249;</button>&#8249;</button>
+                <img id="lightboxImg"src="">
+                <button class="nav-btn next" onclick="changeImage(1)">&#8250;</button>
+                </div>
+
+                <script>
+                    let currentIndex=0;
+                    const images=document.querySelectorAll('.gallery img');
+                    const lightbox=document.getElementById('lightbox');
+                    const lightboxImg=document.grtElementById('lightboxImg');
+
+                    images.forEach((img,index) => {
+                        img,addEventListener('click',()=>{
+                            currnetIndex=index;
+                            lightboxImg.src=img.src;
+                            lightbox.classList.add('active');
+                        });
+                    });
+                    function closelightbox(){
+                        lighbox.classList.remove('active');
+                    }
+                    function changeImage(direction){
+                        currentIndex+=direction;
+                        if(currntIndex>=image.lenght) currentIndex=0;
+                        if(currentIndex<0)currentIndex=image.lenght-1;
+                        lightboxImg.src=images[currentIndex].src;
+                    }
+                    document.addEventListener('keydown', (e)=> {
+                        if(!lightbox.classList.contains('active')) return;
+                        if(e.key === 'Escape') closeLightbox();
+                        if(e.key === 'ArrowLeft')changeImage(-1);
+                        if(e.key === 'ArrowRoght') changeImage(1);
+                    });
+                    lightbox.addEventListener('click',(e)=>{
+
+                     });
+            
+       </script 
+</body>
+</html>
